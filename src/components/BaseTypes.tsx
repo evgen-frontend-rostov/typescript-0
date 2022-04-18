@@ -1,3 +1,5 @@
+import { stringify } from "querystring";
+
 export const BaseTypes = () => {
   // ------ Boolean ------
   let isAge: boolean = true;
@@ -58,16 +60,63 @@ export const BaseTypes = () => {
   const create = (o: object | null): void => {};
   create({ obj: 1 });
 
+  let user: {name: string, age: number} = {
+    name: 'Evgen',
+    age: 30
+  }
+
+  type Person = {
+    name: string,
+    age: number,
+    nickName?: string,
+    getName?: () => string
+  }
+
   // ------ User types ------
   type Name = string;
   const a: Name = "Evgeniy";
 
   // ------ Functions ------
-  const createPass = (name: string = "Evgen", age?: number | string): string =>
-    `${name}${age}`;
+  const createPass = (name: string = "Evgen", age?: number | string): string => `${name}${age}`;
+
+  // *** тип Объединение - когда переменная может иметь несколько типов,
+  // которые записаны через вертикальную черту
 
   const mySkills = (name: string, ...skills: Array<string>): string =>
     `${name}, my skills are ${skills.join()}`;
   console.log(mySkills("Kirill", "React", "Redux"));
+
+    //Describe function type. If we need to assign a function value to a variable
+
+    let myFunc: (argument: string) => void;
+
+    function oldFunc (name: string): void {
+      console.log(name);
+    }
+
+    myFunc = oldFunc;
+
+  // ------ Classes ------
+
+    class User {
+      name: string;
+      age: number;
+      nickName: string;
+
+      constructor (name: string, age: number, nickName: string) {
+        this.name = name;
+        this.age = age;
+        this.nickName = nickName;
+      }
+    }
+
+    const evgen = new User('Evgen', 30, 'evgen-frontend-rostov');
+    const dimon = new User('Dimon', 26, 'cheeff');
+    console.log(evgen);
+    console.log(dimon);
+
+    // Access modifiers: public(default), private, protected, readonly
+    
+
   return <></>;
 };

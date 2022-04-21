@@ -173,5 +173,75 @@ export const BaseTypes = () => {
 
   // const userDev = new Heir(32);
 
+  // ------ Interface ------
+  // Интерфейс - создаёт новые типизированные сущности.
+  // Особенности:
+  // 1. Может наследоваться от другого типа
+  // 2. Может расширяться
+  // 3. Может иметь опциональные параметры, помеченные знаком "?"
+  // 4. Поле с модификатором readonly нельзя изменять
+  // 5. Можно объявить неопределённое колличество динамических полей, написав в интерфейсе одну строку: '[propName: string]: any'
+  // 6. Интерфейсы служат для типизации класса и определяют минимальный набор полей для класса
+
+  interface ClassInterface {
+    brand: string;
+    year: number;
+    power: number;
+    getAge(): number;
+  }
+
+  class Moto implements ClassInterface {
+    brand: string = "Yamaha";
+    model: string = "Fazer"; // <-- этого поля нет в интерфейсе, класс может расширять свой интерфейс
+    year: number = 2000;
+    power: number = 100;
+    getAge(): number {
+      return 2022 - this.year;
+    }
+  }
+  // Класс может быть создан от двух интерфейсов
+
+  interface CatName {
+    nickName: string;
+  }
+
+  interface CatColor {
+    color: string;
+  }
+
+  class Cat implements CatName, CatColor {
+    nickName: string = "Вася";
+    color: string = "black";
+  }
+
+  interface IUser {
+    name: string;
+    age: number;
+  }
+
+  // Интерфейс можно наследовать от одного или более других интерфейсов
+
+  // ------ Type ------
+
+  // Тип - создаёт алиас для базовых типов
+
+  type TUser = {
+    name: string;
+    age: number;
+  };
+
+  // ------ Generic ------
+
+  const genericFunc = <T,>(data: T): T => {
+    return data;
+  };
+
+  function getter<T>(data: T): T {
+    return data;
+  }
+
+  // дженерик может принимать несколько типов <T, K>
+  // один из типов можно явно типизировать <T, K extends number>
+
   return <></>;
 };
